@@ -1,0 +1,16 @@
+@import 'variables';
+
+/* Reset Defaults */
+body {
+  margin: 0;
+  font-size: 1em;
+}
+
+.app {
+  padding: 20px;
+}
+
+.clock {
+  font-family: $font-alt;
+  font-size: 5em;
+}
