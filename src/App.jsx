@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import Background from "./Background";
+import Loader from './Loader';
 import Header from "./Header";
 import Agenda from "./agenda/Agenda";
 import "./App.scss";
@@ -9,7 +10,7 @@ function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [calendarList, setCalendarList] = useState([]);
   const [events, setEvents] = useState([]);
-  const [loaded, setLoaded] = useState(false);
+  const [fetching, setFetching] = useState(true);
 
   // Setup Google Calendar API
   var gapi = window.gapi,
@@ -62,7 +63,7 @@ function App() {
   };
 
   const fetchCalendars = () => {
-    setLoaded(false);
+    setFetching(true);
     gapi.client.calendar.calendarList.list({}).then((resp) => {
       let calendars = resp.result.items.map((item) => {
         return {
@@ -97,7 +98,7 @@ function App() {
                 });
               });
             }
-            setLoaded(true);
+            setFetching(false);
           }).catch((err) => {
             console.log(err);
           });
@@ -112,7 +113,9 @@ function App() {
       {isSignedIn ? (
         <div>
           <Header />
-          <Agenda
+          {
+            fetching ? <Loader /> :
+            <Agenda
             events={events
               .sort((a, b) => {
                 if (a.startTime.isBefore(b.startTime)) {
@@ -123,6 +126,8 @@ function App() {
               })
               .slice(0, 49)}
           />
+          }
+          
         </div>
       ) : (
         <div>
