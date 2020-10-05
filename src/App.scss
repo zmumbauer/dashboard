@@ -22,7 +22,7 @@ body {
     font-size: 2em;
     text-transform: uppercase;
     text-align: right;
-    margin-top: -15px;
+    margin-top: -5px;
     color: red;
   }
 }
@@ -43,22 +43,32 @@ body {
 }
 
 .events-list {
-  width: 100%;
-  padding: 4%;
+  width: 50%;
   box-sizing: border-box;
   background-color: $grey;
+  padding: 40px;
+}
+
+.daily-calendar {
+  &__title {
+    font-family: $font-main;
+    font-size: 3em;
+    margin-bottom: 20px;
+  }
+  padding: 20px;
 }
 
 .upcoming-event {
   margin-bottom: 20px;
+  margin-left: 40px;
   &__title {
     font-family: $font-alt;
-    font-size: 3em;
+    font-size: 2em;
     color: white;
   }
   &__time {
     font-family: $font-alt;
-    font-size: 2em;
+    font-size: 1.5em;
     margin-top: 10px;
     margin-left: 20px;
   }

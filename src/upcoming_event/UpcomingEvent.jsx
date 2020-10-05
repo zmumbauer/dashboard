@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function UpcomingEvent(props) {
-
 	return (
 		<div className="upcoming-event">
 			<div className="upcoming-event__title">{props.title}</div>

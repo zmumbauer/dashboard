@@ -3,7 +3,6 @@ import moment from "moment";
 import Clock from "./clock/Clock";
 import WeatherWidget from "./weather_widget/WeatherWidget";
 import EventsList from "./events_list/EventsList";
-
 import "./App.scss";
 
 function App() {
@@ -123,7 +122,15 @@ function App() {
             <WeatherWidget />
           </div>
 
-          <EventsList events={events} />
+          <EventsList
+            events={events.sort((a, b) => {
+              if (a.startTime.isBefore(b.startTime)) {
+                return -1;
+              } else {
+                return 1;
+              }
+            }).slice(0, 49)}
+          />
         </div>
       ) : (
         <div>
