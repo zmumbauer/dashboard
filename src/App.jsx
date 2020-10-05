@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import Clock from "./clock/Clock";
 import WeatherWidget from "./weather_widget/WeatherWidget";
-import EventsList from "./events_list/EventsList";
+import Agenda from "./agenda/Agenda";
 import "./App.scss";
 
 function App() {
@@ -71,7 +71,6 @@ function App() {
             color: item.backgroundColor,
           };
         });
-        console.log(calendars);
         calendars.forEach((calendar) => {
           // Iterate through calendar events
           gapi.client.calendar.events
@@ -122,7 +121,7 @@ function App() {
             <WeatherWidget />
           </div>
 
-          <EventsList
+          <Agenda
             events={events.sort((a, b) => {
               if (a.startTime.isBefore(b.startTime)) {
                 return -1;

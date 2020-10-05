@@ -9,19 +9,30 @@ body {
 }
 
 .app {
-  padding: 5%;
+  padding: 2%;
 }
 
 .clock {
   &__time {
+    display: flex;
     font-family: $font-alt;
     font-size: 4em;
   }
+  &__seconds {
+    display: flex;
+    flex-direction: column;
+    & > span {
+      margin-left: 10px;
+      margin-top: 10px;
+      font-size: .5em;
+    } & > span:nth-child(2) {
+      margin-top: -17px;
+    }
+  }
   &__date {
     font-family: $font-alt;
-    font-size: 1.5em;
+    font-size: 1.2em;
     text-transform: uppercase;
-    text-align: right;
     margin-top: -5px;
     color: red;
   }
@@ -34,7 +45,6 @@ body {
   height: 100%;
   &__icon {
     height: 100px;
-    padding: 20px;
     box-sizing: border-box;
   }
 
@@ -49,30 +59,28 @@ body {
   width: 50%;
   box-sizing: border-box;
   background-color: $grey;
-  padding: 40px;
 }
 
 .daily-calendar {
   &__title {
     font-family: $font-main;
-    font-size: 3em;
+    font-size: 2em;
     margin-bottom: 20px;
   }
   padding: 20px;
 }
 
 .upcoming-event {
-  margin-bottom: 20px;
-  margin-left: 40px;
+  margin-bottom: 10px;
+  margin-left: 20px;
   &__title {
     font-family: $font-alt;
-    font-size: 2em;
+    font-size: 1.5em;
     color: white;
   }
   &__time {
     font-family: $font-alt;
-    font-size: 1.5em;
-    margin-top: 10px;
+    font-size: 1.2em;
     margin-left: 20px;
   }
 }

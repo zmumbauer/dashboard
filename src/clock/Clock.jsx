@@ -16,7 +16,13 @@ export default function Clock(props) {
 
 	return (
 		<div className="clock">
-			<div className="clock__time">{time.format("hh[:]mm[:]ssa")}</div>
+			<div className="clock__time">
+				<div>{time.format("hh[:]mm")}</div>
+				<div className="clock__seconds">
+					<span>{time.format("ss")}</span>
+					<span>{time.format("a")}</span>
+				</div>
+			</div>
 			<div className="clock__date">{time.format("dddd, MMMM Do")}</div>
 		</div>
 	);

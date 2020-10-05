@@ -60,10 +60,10 @@ export default function WeatherWidget(props) {
 
 	return (
 		<div className="weather-widget">
+			{weatherIcon(currentData.weatherCode)}
 			<div className="weather-widget__temp">
 				{currentTemp}°
 			</div>
-			{weatherIcon(currentData.weatherCode)}
 		</div>
 	);
 }
