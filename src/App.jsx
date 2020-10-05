@@ -114,7 +114,7 @@ function App() {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              marginBottom: "40px"
+              marginBottom: "40px",
             }}
           >
             <Clock />

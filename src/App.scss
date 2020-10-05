@@ -9,7 +9,7 @@ body {
 }
 
 .app {
-  padding: 2%;
+  padding: 2% 3%;
 }
 
 .clock {
@@ -50,6 +50,7 @@ body {
   &__temp {
     font-family: $font-alt;
     font-size: 2em;
+    margin-top: -10px;
   }
   
 }
