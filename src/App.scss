@@ -15,11 +15,11 @@ body {
 .clock {
   &__time {
     font-family: $font-alt;
-    font-size: 6em;
+    font-size: 4em;
   }
   &__date {
     font-family: $font-alt;
-    font-size: 2em;
+    font-size: 1.5em;
     text-transform: uppercase;
     text-align: right;
     margin-top: -5px;
@@ -29,17 +29,20 @@ body {
 
 .weather-widget {
   display: flex;
+  flex-direction: column;
   align-items: center;
   height: 100%;
-  &__temp {
-    font-family: $font-alt;
-    font-size: 6em;
-  }
   &__icon {
-    height: 150px;
+    height: 100px;
     padding: 20px;
     box-sizing: border-box;
   }
+
+  &__temp {
+    font-family: $font-alt;
+    font-size: 3em;
+  }
+  
 }
 
 .events-list {
