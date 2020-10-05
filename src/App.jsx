@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import Clock from "./clock/Clock";
+import Background from './Background';
 import WeatherWidget from "./weather_widget/WeatherWidget";
 import Agenda from "./agenda/Agenda";
 import "./App.scss";
@@ -107,13 +108,20 @@ function App() {
 
   return (
     <div className="app">
+    <Background />
       {isSignedIn ? (
-        <div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            height: '100%'
+          }}
+        >
           <div
             style={{
               display: "flex",
               justifyContent: "space-between",
-              alignItems: "center",
+              width: "100%",
               marginBottom: "40px",
             }}
           >
@@ -122,13 +130,15 @@ function App() {
           </div>
 
           <Agenda
-            events={events.sort((a, b) => {
-              if (a.startTime.isBefore(b.startTime)) {
-                return -1;
-              } else {
-                return 1;
-              }
-            }).slice(0, 49)}
+            events={events
+              .sort((a, b) => {
+                if (a.startTime.isBefore(b.startTime)) {
+                  return -1;
+                } else {
+                  return 1;
+                }
+              })
+              .slice(0, 49)}
           />
         </div>
       ) : (

@@ -26,7 +26,7 @@ export default function Agenda(props) {
 	}, [props.events]);
 
 	return (
-		<div className="events-list">
+		<div className="agenda">
 			<div className="daily-calendar">
 				<div className="daily-calendar__title">Today</div>
 				{eventsToday.length > 0
