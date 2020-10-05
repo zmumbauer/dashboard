@@ -1,16 +1,65 @@
-@import 'variables';
+@import "variables";
 
 /* Reset Defaults */
 body {
   margin: 0;
   font-size: 1em;
+  background-color: black;
+  color: white;
 }
 
 .app {
-  padding: 20px;
+  padding: 5%;
 }
 
 .clock {
-  font-family: $font-alt;
-  font-size: 5em;
+  &__time {
+    font-family: $font-alt;
+    font-size: 6em;
+  }
+  &__date {
+    font-family: $font-alt;
+    font-size: 2em;
+    text-transform: uppercase;
+    text-align: right;
+    margin-top: -15px;
+    color: red;
+  }
+}
+
+.weather-widget {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  &__temp {
+    font-family: $font-alt;
+    font-size: 6em;
+  }
+  &__icon {
+    height: 150px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+}
+
+.events-list {
+  width: 100%;
+  padding: 4%;
+  box-sizing: border-box;
+  background-color: $grey;
+}
+
+.upcoming-event {
+  margin-bottom: 20px;
+  &__title {
+    font-family: $font-alt;
+    font-size: 3em;
+    color: white;
+  }
+  &__time {
+    font-family: $font-alt;
+    font-size: 2em;
+    margin-top: 10px;
+    margin-left: 20px;
+  }
 }
