@@ -42,15 +42,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
   &__icon {
-    height: 100px;
+    height: 75px;
     box-sizing: border-box;
   }
 
   &__temp {
     font-family: $font-alt;
-    font-size: 3em;
+    font-size: 2em;
   }
   
 }

@@ -112,9 +112,9 @@ function App() {
           <div
             style={{
               display: "flex",
-              height: "200px",
               justifyContent: "space-between",
               alignItems: "center",
+              marginBottom: "40px"
             }}
           >
             <Clock />
