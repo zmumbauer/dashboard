@@ -5,6 +5,7 @@ import IconRain from "./icons/rain.svg";
 import IconSun from "./icons/sunny.svg";
 import IconStorm from "./icons/storm.svg";
 import IconSnow from "./icons/snow.svg";
+import Loader from "../Loader";
 
 export default function WeatherWidget(props) {
 	const latitude = "41.812825";
@@ -14,6 +15,7 @@ export default function WeatherWidget(props) {
 	const [minuteData, setMinuteData] = useState([]);
 	const [hourData, setHourData] = useState([]);
 	const [dailyData, setDailyData] = useState([]);
+	const [fetching, setFetching] = useState(true);
 
 	useEffect(() => {
 		axios
@@ -30,6 +32,7 @@ export default function WeatherWidget(props) {
 				setMinuteData(resp.data.minutely);
 				setHourData(resp.data.hourly);
 				setDailyData(resp.data.daily);
+				setFetching(false);
 			})
 			.catch((data) => console.log("error", data));
 	}, []);
@@ -39,50 +42,22 @@ export default function WeatherWidget(props) {
 			return null;
 		}
 		if (weatherCode === "800") {
-			return { IconSun };
+			return IconSun;
 		}
 
 		switch (weatherCode.substr(0, 1)) {
 			case "2":
-				return (
-					<img
-						src={IconStorm}
-						className="weather-widget__icon"
-						alt="thunderstorm"
-					/>
-				);
+				return IconStorm;
 			case "3":
-				return (
-					<img
-						src={IconRain}
-						className="weather-widget__icon"
-						alt="rain"
-					/>
-				);
+				return IconRain;
 			case "5":
-				return (
-					<img
-						src={IconRain}
-						className="weather-widget__icon"
-						alt="rain"
-					/>
-				);
+				return IconRain;
+
 			case "6":
-				return (
-					<img
-						src={IconSnow}
-						className="weather-widget__icon"
-						alt="snow"
-					/>
-				);
+				return IconSnow;
+
 			case "8":
-				return (
-					<img
-						src={IconCloudy}
-						className="weather-widget__icon"
-						alt="sunny"
-					/>
-				);
+				return IconCloudy;
 			default:
 				return null;
 		}
@@ -90,8 +65,20 @@ export default function WeatherWidget(props) {
 
 	return (
 		<div className="weather-widget">
-			{weatherIcon(currentData.weatherCode)}
-			<div className="weather-widget__temp">{currentData.temperature}°</div>
+			{fetching ? (
+				<Loader />
+			) : (
+				<div>
+					<img
+						src={`${weatherIcon(currentData.weatherCode)}`}
+						className="weather-widget__icon"
+						alt="sunny"
+					/>
+					<div className="weather-widget__temp">
+						{currentData.temperature}°
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

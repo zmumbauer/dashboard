@@ -14,6 +14,7 @@ export default function Background(props) {
 				setBackgroudImage(resp.data.urls.full);
 			})
 			.catch((err) => {
+				setBackgroudImage("https://source.unsplash.com/collection/795588/1600x900");
 				console.log(`Error fetching photo: ${err}`);
 			});
 			

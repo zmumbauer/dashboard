@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import Clock from "./clock/Clock";
-import Background from './Background';
-import WeatherWidget from "./weather_widget/WeatherWidget";
+import Background from "./Background";
+import Header from "./Header";
 import Agenda from "./agenda/Agenda";
 import "./App.scss";
 
@@ -10,6 +9,7 @@ function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [calendarList, setCalendarList] = useState([]);
   const [events, setEvents] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   // Setup Google Calendar API
   var gapi = window.gapi,
@@ -32,7 +32,7 @@ function App() {
   // If signed in, fetch events
   useEffect(() => {
     if (isSignedIn) {
-      upcomingEvents();
+      fetchCalendars();
     }
   }, [isSignedIn]);
 
@@ -61,74 +61,57 @@ function App() {
     setEvents((prevState) => [...prevState, event]);
   };
 
-  const upcomingEvents = () => {
-    // Get list of calendars
-    gapi.client.calendar.calendarList.list({}).then(
-      function(response) {
-        let calendars = response.result.items.map((item) => {
-          return {
-            id: item.id,
-            name: item.summary,
-            color: item.backgroundColor,
-          };
-        });
-        calendars.forEach((calendar) => {
-          // Iterate through calendar events
-          gapi.client.calendar.events
-            .list({
-              calendarId: calendar.id,
-              timeMin: new Date().toISOString(),
-              showDeleted: false,
-              singleEvents: true,
-              maxResults: 10,
-              orderBy: "startTime",
-            })
-            .then(function(response) {
-              var respEvents = response.result.items;
+  const fetchCalendars = () => {
+    setLoaded(false);
+    gapi.client.calendar.calendarList.list({}).then((resp) => {
+      let calendars = resp.result.items.map((item) => {
+        return {
+          id: item.id,
+          name: item.summary,
+          color: item.backgroundColor,
+        };
+      });
+      calendars.forEach((calendar) => {
 
-              if (respEvents.length > 0) {
-                respEvents.forEach((event) => {
-                  addEvent({
-                    ...event,
-                    startTime: moment(
-                      event.start.dateTime || moment(event.start.date)
-                    ),
-                    color: calendar.color,
-                  });
+        // Iterate through calendar events
+        gapi.client.calendar.events
+          .list({
+            calendarId: calendar.id,
+            timeMin: new Date().toISOString(),
+            showDeleted: false,
+            singleEvents: true,
+            maxResults: 10,
+            orderBy: "startTime",
+          })
+          .then((resp) => {
+            var respEvents = resp.result.items;
+
+            if (respEvents.length > 0) {
+              respEvents.forEach((event) => {
+                addEvent({
+                  ...event,
+                  startTime: moment(
+                    event.start.dateTime || moment(event.start.date)
+                  ),
+                  color: calendar.color,
                 });
-              }
-            });
-        });
-      },
-      function(err) {
-        console.error("Couldn't fetch calendars", err);
-      }
-    );
+              });
+            }
+            setLoaded(true);
+          }).catch((err) => {
+            console.log(err);
+          });
+      });
+    });
+    
   };
 
   return (
     <div className="app">
-    <Background />
+      <Background />
       {isSignedIn ? (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            height: '100%'
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-              marginBottom: "40px",
-            }}
-          >
-            <Clock />
-            <WeatherWidget />
-          </div>
-
+        <div>
+          <Header />
           <Agenda
             events={events
               .sort((a, b) => {
