@@ -18,6 +18,19 @@ export default function WeatherWidget(props) {
 	const [fetching, setFetching] = useState(true);
 
 	useEffect(() => {
+		getWeather();
+		const weatherInterval = setInterval(() => {
+			getWeather();
+		}, 1000 * 60 * 5);
+
+		return () => {
+			clearInterval(weatherInterval);
+		}
+		
+	}, []);
+
+	const getWeather = () => {
+		setFetching(true);
 		axios
 			.get(
 				`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_WEATHER}&units=${units}`
@@ -35,7 +48,7 @@ export default function WeatherWidget(props) {
 				setFetching(false);
 			})
 			.catch((data) => console.log("error", data));
-	}, []);
+	};
 
 	const weatherIcon = (weatherCode) => {
 		if (weatherCode === undefined) {

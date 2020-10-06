@@ -35,6 +35,14 @@ function App() {
     if (isSignedIn) {
       fetchCalendars();
     }
+    const calendarInterval = setInterval(() => {
+      fetchCalendars();
+    }, 1000 * 60 * 5);
+
+    return () => {
+      clearInterval(calendarInterval);
+    }
+
   }, [isSignedIn]);
 
   const gapiInit = () => {
