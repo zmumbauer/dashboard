@@ -73,6 +73,8 @@ function App() {
   const fetchCalendars = () => {
     setFetching(true);
     gapi.client.calendar.calendarList.list({}).then((resp) => {
+      setCalendarList([]);
+      setEvents([]);
       let calendars = resp.result.items.map((item) => {
         return {
           id: item.id,
