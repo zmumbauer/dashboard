@@ -134,7 +134,7 @@ function App() {
                   return 1;
                 }
               })
-              .slice(0, 49)}
+              .slice(0, 15)}
           />
           }
           
