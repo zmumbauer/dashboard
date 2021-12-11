@@ -45,6 +45,7 @@ export default function WeatherWidget(props) {
 				setMinuteData(resp.data.minutely);
 				setHourData(resp.data.hourly);
 				setDailyData(resp.data.daily);
+				console.log(resp)
 				setFetching(false);
 			})
 			.catch((data) => console.log("error", data));

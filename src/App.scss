@@ -123,12 +123,12 @@ body {
 }
 
 .daily-calendar {
+  margin-bottom: 40px;
   &__title {
     font-family: $font-main;
     font-size: 2em;
     margin-bottom: 20px;
   }
-  padding: 20px;
 }
 
 .upcoming-event {
